@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, url_for
 
 # インスタンス生成
 app = Flask(__name__)
 
 # ルーティング
 @app.route('/')
-def shouw_index():
+def show_index():
     return'indexページ'
 
 @app.route('/hello/')
@@ -14,4 +14,8 @@ def show_hello(name=None):
     return f'Hello, {name}'
 
 # 実行
-if __name__ == '__main__'
+if __name__ == '__main__':
+    with app.test_request_context():
+        print(url_for('show_index'))
+        print(url_for('show_hello'))
+        print(url_for('show_hello', name='tarou'))
