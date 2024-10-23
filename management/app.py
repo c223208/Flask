@@ -22,7 +22,8 @@ class member:
 
 @app.route('/list')
 def member_list():
-    return render_template
+    member_list = [member(1, "山田"), member(2, "伊藤"), member(3, "田中")]
+    return render_template('list.html', members = member_list)
 
 # 詳細
 
