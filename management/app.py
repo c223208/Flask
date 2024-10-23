@@ -14,6 +14,11 @@ class member:
     # コンストラクタ
     def __init__(self, id, name):
         self.id = id
+        self.name = name
+    # 表示用関数
+    def __str__(self):
+        return f'ID：{self.id} 名前：{self.name}'
+    
 
 @app.route('/list')
 def member_list():
