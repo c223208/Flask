@@ -93,6 +93,19 @@ def show_filter_block():
     word = 'pen'
     return render_template('filter/block.html', show_word = word)
 
+# フィルター：特定の変数
+@app.route('/filter2')
+def show_filter_variable():
+    # クラスを作成
+    momo = Hero ('桃太郎', 25)
+    kinta = Hero ('金太郎', 35)
+    ura = Hero ('浦島タロウ', 45)
+    kagu = Hero ('かぐや姫', 55)
+    kasa = Hero ('笠地蔵', 65)
+    # リストに詰める
+    hero_list = [momo, kinta, ura, kagu, kasa]
+    return render_template('filter/filter_list.html', heroes = hero_list)
+
 # 実行
 if __name__ == '__main__':
     app.run()
