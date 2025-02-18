@@ -87,6 +87,11 @@ def show_jinja_if(target="colorless"):
     print(target)
     return render_template('jinja/if_else.html', color=target)
 
+# フィルター：文全体
+@app.route('/filter')
+def show_filter_block():
+    word = 'pen'
+    return render_template('filter/block.html', show_word = word)
 
 # 実行
 if __name__ == '__main__':
