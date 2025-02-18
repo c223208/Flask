@@ -121,6 +121,13 @@ def show_my_filter():
     long_word = 'じゅげむじゅげむごこうのすりきれ'
     return render_template('filter/my_filter.html', show_word1 = word, show_word2 = long_word)
 
+# エラーハンドリング
+@app.errorhandler(404)
+def show_404_page(error):
+    msg = error.description
+    print('エラー内容：', msg)
+    return render_template('errors/404.html'), 404
+
 # 実行
 if __name__ == '__main__':
     app.run()
