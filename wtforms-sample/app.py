@@ -16,8 +16,8 @@ def show_enter():
     # フォームの作成
     form = UserInfoForm(request.form)
     # POST
-    if request.method == "POST":
-        pass
+    if request.method == "POST" and form.validate():
+        return render_template('result.html', form=form)
     # GET
     return render_template('enter.html', form=form)
 

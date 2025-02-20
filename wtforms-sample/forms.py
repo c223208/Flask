@@ -4,24 +4,34 @@ from wtforms.fields import(
     RadioField, SelectField, BooleanField, TextAreaField,
     EmailField, SubmitField
 )
-
+# 使用する validator をインポート
+from wtforms.validators import(
+    DataRequired, EqualTo, Length, NumberRange, Email
+)
 # ==================================================
 # Form クラス
 # ==================================================
 # ユーザー情報クラス
 class UserInfoForm(Form):
     # 名前：文字列入力
-    name = StringField('名前：', render_kw={"placeholder":"（例）山田 太郎"})
+    name = StringField('名前：', validators=[DataRequired('名前は必須入力です')],
+            render_kw={"placeholder":"（例）山田 太郎"})
     # 年齢：整数値入力
-    age = IntegerField('年齢：', default=20)
+    age = IntegerField('年齢：', validators=[NumberRange(18, 100,
+            '入力範囲は18歳から100歳です')], default=20)
     # パスワード：パスワード入力
-    password = PasswordField('パスワード：')
+    password = PasswordField('パスワード：',
+            validators=[Length(1, 10, 
+            'パスワードの長さは1文字以上10文字以内です'), 
+            EqualTo('confirm_password', 'パスワードが一致しません')])
     # 確認用：パスワード入力
     confirm_password = PasswordField('パスワード確認：')
     # Email：メールアドレス入力
-    email = EmailField('メールアドレス：')
+    email = EmailField('メールアドレス：', 
+            validators=[Email('メールアドレスのフォーマットではありません')])
     # 生年月日：日付入力
-    birthday = DateField('生年月日：', format="%Y-%m-%d", render_kw={"placeholder":"yyyy/mm/dd"})
+    birthday = DateField('生年月日：', validators=[DataRequired('生年月日は入力必須です')], 
+            format="%Y-%m-%d", render_kw={"placeholder":"yyyy/mm/dd"})
     # 性別：ラジオボタン
     gender = RadioField(
         '性別：', choices=[('man','男性'),('woman','女性')], default='man'
