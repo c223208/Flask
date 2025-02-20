@@ -18,8 +18,8 @@ def show_enter():
     # POST
     if request.method == "POST" and form.validate():
         return render_template('result.html', form=form)
-    # GET
-    return render_template('enter.html', form=form)
+    # POST以外と「form.validate()がfalse」
+    return render_template('enter2.html', form=form)
 
 # ==================================================
 # 実行
