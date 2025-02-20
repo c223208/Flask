@@ -21,7 +21,7 @@ class UserInfoForm(Form):
     # Email：メールアドレス入力
     email = EmailField('メールアドレス：')
     # 生年月日：日付入力
-    birth = DateField('生年月日：', format="%Y-%m-%d", render_kkw={"placeholder":"yyyy/mm/dd"})
+    birthday = DateField('生年月日：', format="%Y-%m-%d", render_kw={"placeholder":"yyyy/mm/dd"})
     # 性別：ラジオボタン
     gender = RadioField(
         '性別：', choices=[('man','男性'),('woman','女性')], default='man'
