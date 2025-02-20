@@ -10,14 +10,14 @@
         {% if form.errors %}
             <ul>
             === エラーメッセージ ===
-            {% for k, v in fom.errors.items() %}
+            {% for k, v in form.errors.items() %}
                 <li>{{ k }}:{{ v }}</li>
             {% endfor %}
             </ul>
         {% endif %}
     </div>
     <!--▼▼▼リスト5.8追加部分▼▼▼-->
-    <form method="POST">
+    <form method="POST" novalidate>
         {{ form.name.label }}{{ form.name(size=20)}}<br>
         {{ form.age.label }}{{ form.age()}}<br>
         {{ form.password.label }}{{form.password(size=20)}}<br>
