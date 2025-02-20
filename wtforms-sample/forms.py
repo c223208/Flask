@@ -5,8 +5,9 @@ from wtforms.fields import(
     EmailField, SubmitField
 )
 # 使用する validator をインポート
+# リスト5.14で「ValidationError」を追加
 from wtforms.validators import(
-    DataRequired, EqualTo, Length, NumberRange, Email
+    DataRequired, EqualTo, Length, NumberRange, Email, ValidationError
 )
 # ==================================================
 # Form クラス
@@ -23,7 +24,16 @@ class UserInfoForm(Form):
     password = PasswordField('パスワード：',
             validators=[Length(1, 10, 
             'パスワードの長さは1文字以上10文字以内です'), 
-            EqualTo('confirm_password', 'パスワードが一致しません')])
+            EqualTo('confirm_password', 'パスワードが一致しません')])        
+    # ▼▼▼リスト5.14で追加▼▼▼
+    # カスタムバリデータ
+    # 英数字と記号が含まれているかチェックする
+    def validate_password(self, password):
+        if not (any(c.isalpha() for c in password.data) and\
+            any(c.isdigit() for c in password.data) and \
+            any(c in '!@#$%^&*' for c in password.data)):
+            raise ValidationError('パスワードには【英数字と記号：!@#$%^&*()】を含める必要があります')
+    # ▲▲▲リスト5.14で追加▲▲▲
     # 確認用：パスワード入力
     confirm_password = PasswordField('パスワード確認：')
     # Email：メールアドレス入力
